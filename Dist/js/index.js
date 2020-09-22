@@ -1,5 +1,7 @@
 $(document).ready(function(){
+     // e.preventDefault();
       fetchUser(); //This function will load all data on web page when page load
+
       function fetchUser() // This function will fetch data from table and display under <div id="result">
       {
        var action = "Load";
@@ -8,12 +10,12 @@ $(document).ready(function(){
         method:"POST", //Using of Post method for send data
         data:{action:action}, //action variable data has been send to server
         success:function(data){
-              console.log(data);
+             // console.log(data);
          $('#resultset').html(data); //It will display data under div tag with id result
         }
        });
       }
-     
+    
     $('#usercheck').hide();
    $('#emailcheck').hide();
    $('#mobilecheck').hide();
@@ -165,42 +167,131 @@ $(document).ready(function(){
                            
                }
    
-         $('#save').click(function(e){ 
-           e.preventDefault();
+         $('#save').click(function(){ 
+           //e.preventDefault();
+            //   user_err = true;
+            //   email_err= true;
+            //   mobile_err= true;
+            //   gender_err= true;
    
-                user_err = true;
-   
-               email_err= true;
-               mobile_err= true;
-               gender_err= true;
-   
-               username_check();
-               email_check();
-               mobile_check();
-               gender_check();
-   
-               if((user_err == true ) && (email_err == true ) && (mobile_err == true) && (gender_err == true) ){
+            //    username_check();
+            //    email_check();
+            //    mobile_check();
+            //    gender_check();
+            ValidateUser();
+            //    if((user_err == true ) && (email_err == true ) && (mobile_err == true) && (gender_err == true) ){
                  $.ajax({  
                         url:"action.php",  
                         method:"POST",  
                        data:$("#form-data").serialize()+"&action=save",
-                        success:function(data){
-                          debugger;
-                          console.log(data);
-                          $("#result").html(data);
-                        //  alert(data);
-                          $("#form-data") [0].reset(); 
-                          fetchUser(); //This function will load all data on web page when page load
+            
+                        success:function(response){
+                              console.log("working");
+                        debugger;
+                          alert(response);
+                         // $("#form-data") [0].reset(); 
+                         // fetchUser(); //This function will load all data on web page when page load
       
                          }     				
                                     
                    });
-               return true;
-               }else{
-               return false;
-               }
-   
-   
+               
                                   
-         });
-         });
+        });
+      ValidateUser();
+      function ValidateUser()
+      {
+            user_err = true;
+            email_err= true;
+            mobile_err= true;
+            gender_err= true;
+ 
+             username_check();
+             email_check();
+             mobile_check();
+             gender_check();
+             if((user_err == true ) && (email_err == true ) && (mobile_err == true) && (gender_err == true) ){
+                  return true;
+             }
+             else
+             {
+                   return false;
+             }
+ 
+      }
+        $('#update').click(function(){ 
+              $.ajax({  
+            url:"action.php",  
+            method:"POST",  
+            data:$("#form-data").serialize()+"&action=update",
+            success:function(data){
+              debugger;
+              console.log(data);
+            //  $("#result").html(data);
+            //  alert(data);
+           //   $("#form-data") [0].reset();       
+             }     				
+                        
+       });
+
+ });
+      
+      $(document).on('click', '.delete', function(){
+            var id = $(this).attr("id");
+           // console.log(this.id); //This code will fetch any customer id from attribute id with help of attr() JQuery method
+            if(confirm("Are you sure you want to remove this data?")) //Confim Box if OK then
+            {
+            // var action = "Delete"; //Define action variable value Delete
+             $.ajax({
+              url:"action.php",    //Request send to "action.php page"
+              method:"GET",     //Using of Post method for send data
+              data:{id:id}, //Data send to server from ajax method
+              success:function(response)
+              {
+               fetchUser();    // fetchUser() function has been called and it will load data under divison tag with id result
+               alert(response);    //It will pop up which data it was received from server side
+              }
+             })
+            }
+            else  //Confim Box if cancel then 
+            {
+             return false; //No action will perform
+            }
+ });
+          
+ 
+ 
+ $(document).on('click', '.editbtn', function(){
+            // e.preventDefault();
+             let cust_id = $(this).attr("id");
+           //  var cust_id=$(this).id;
+             console.log(cust_id);
+              $.ajax({
+                    url:"action.php",   
+                    method:"GET",     
+                    data:{cust_id:cust_id},
+                   success:function(response)
+                   {
+                        data=JSON.parse(response);
+
+                         console.log(data);
+                         console.log(data[0].id);
+                         $("#id").val(data[0].id);
+                         $("#user_name").val(data[0].user_name);
+                         $("#user_email").val(data[0].user_email);
+                         $("#phone_no").val(data[0].phone_no);
+                         $("#gender").val(data[0].gender);
+                        // var gender = $(".gender:checked").val(data[0].gender);
+                        $gender=data[0].gender;
+                        console.log($gender);
+
+
+                   }
+                  
+ 
+              })
+            });
+ 
+      
+          
+      }); 

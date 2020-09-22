@@ -1,3 +1,4 @@
+
 <html>
     <head>
         <title>
@@ -37,20 +38,23 @@
                             <div class="form-group">
                                 <label for="lblgender">Gender:</label><br />
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="gender" id="gender" value="male" />
+         <input class="form-check-input" type="radio" name="gender" id="gender" value="1" <?php echo '#gender'=='1' ?'checked':'' ?>/>
                                     <label class="form-check-label" for="inlineRadio1">Male</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="gender" id="gender" value="female" />
+                                    <input class="form-check-input" type="radio" name="gender" id="gender" value="2" />
                                     <label class="form-check-label" for="inlineRadio2">Female</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="gender" id="gender" value="other" />
+                                    <input class="form-check-input" type="radio" name="gender" id="gender" value="3" />
                                     <label class="form-check-label" for="inlineRadio3">Other</label>
                                 </div>
                                 <h6 id="gendercheck"></h6>
                             </div>
+                            <input type="hidden" name="id" id="id">
                             <button type="submit" class="btn btn-primary" name="save" id="save">Submit</button>
+                            <button type="submit" class="btn btn-warning" name="update" id="update">update</button>
+
                         </form>
                         <span id="result" style="color: green;"></span>
                     </div>
