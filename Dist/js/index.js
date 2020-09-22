@@ -169,17 +169,17 @@ $(document).ready(function(){
    
          $('#save').click(function(){ 
            //e.preventDefault();
-            //   user_err = true;
-            //   email_err= true;
-            //   mobile_err= true;
-            //   gender_err= true;
+              user_err = true;
+              email_err= true;
+              mobile_err= true;
+              gender_err= true;
    
-            //    username_check();
-            //    email_check();
-            //    mobile_check();
-            //    gender_check();
-            ValidateUser();
-            //    if((user_err == true ) && (email_err == true ) && (mobile_err == true) && (gender_err == true) ){
+               username_check();
+               email_check();
+               mobile_check();
+               gender_check();
+   
+               if((user_err == true ) && (email_err == true ) && (mobile_err == true) && (gender_err == true) ){
                  $.ajax({  
                         url:"action.php",  
                         method:"POST",  
@@ -195,12 +195,16 @@ $(document).ready(function(){
                          }     				
                                     
                    });
-               
+               return true;
+               }
+               else
+               {
+               return false;
+               }
                                   
         });
-      ValidateUser();
-      function ValidateUser()
-      {
+      
+        $('#update').click(function(){ 
             user_err = true;
             email_err= true;
             mobile_err= true;
@@ -210,17 +214,10 @@ $(document).ready(function(){
              email_check();
              mobile_check();
              gender_check();
-             if((user_err == true ) && (email_err == true ) && (mobile_err == true) && (gender_err == true) ){
-                  return true;
-             }
-             else
-             {
-                   return false;
-             }
  
-      }
-        $('#update').click(function(){ 
-              $.ajax({  
+             if((user_err == true ) && (email_err == true ) && (mobile_err == true) && (gender_err == true) ){
+           
+      $.ajax({  
             url:"action.php",  
             method:"POST",  
             data:$("#form-data").serialize()+"&action=update",
@@ -233,6 +230,12 @@ $(document).ready(function(){
              }     				
                         
        });
+       return true;
+      }
+      else
+      {
+            return false;
+      }
 
  });
       
