@@ -14,6 +14,7 @@ $(document).ready(function(){
          $('#resultset').html(data); //It will display data under div tag with id result
         }
        });
+      
       }
     
     $('#usercheck').hide();
@@ -167,8 +168,8 @@ $(document).ready(function(){
                            
                }
    
-         $('#save').click(function(){ 
-           //e.preventDefault();
+         $('#save').click(function(e){ 
+            e.preventDefault();
               user_err = true;
               email_err= true;
               mobile_err= true;
@@ -187,10 +188,10 @@ $(document).ready(function(){
             
                         success:function(response){
                               console.log("working");
-                        debugger;
+                       // debugger;
                           alert(response);
-                         // $("#form-data") [0].reset(); 
-                         // fetchUser(); //This function will load all data on web page when page load
+                          $("#form-data") [0].reset(); 
+                          fetchUser(); //This function will load all data on web page when page load
       
                          }     				
                                     
@@ -204,7 +205,8 @@ $(document).ready(function(){
                                   
         });
       
-        $('#update').click(function(){ 
+        $('#update').click(function(e){ 
+              e.preventDefault();
             user_err = true;
             email_err= true;
             mobile_err= true;
@@ -221,12 +223,15 @@ $(document).ready(function(){
             url:"action.php",  
             method:"POST",  
             data:$("#form-data").serialize()+"&action=update",
-            success:function(data){
-              debugger;
-              console.log(data);
-            //  $("#result").html(data);
-            //  alert(data);
-           //   $("#form-data") [0].reset();       
+            success:function(response){
+                  console.log(response);
+
+              //debugger;
+              //$("#result").html(data);
+             alert(response);
+             fetchUser();
+             $("#form-data") [0].reset(); 
+                  
              }     				
                         
        });

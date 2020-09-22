@@ -40,15 +40,24 @@ class AdminModel{
         $stmt = $this->con->prepare($sql);
         if($stmt->execute())
         {
-            echo "Updated";
-        }
+                $rowCount=$stmt->rowCount();
+                if($rowCount>0)
+                {
+                    echo "Updated";
+                }
+                else
+                {
+                    echo "You Will be Not Change";
+                }
+            }
         else
         {
-            echo "Not Updated";
+           echo "Somthing Wrong Plz Check"; 
         }
         return true;
-
     }
+
+    
     public function DeleteTestData($id)
     {
         $sql="DELETE FROM `tbl_test` WHERE id='$id'";
