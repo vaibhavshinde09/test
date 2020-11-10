@@ -4,11 +4,13 @@
         <title>
             Test Form Riverbridge
         </title>
+
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Bootstrap 4 Vertical Form Layout</title>
         <link rel="stylesheet" href="../Dist/css/bootstrap4/bootstrap.min.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+        <script src="../Dist/js/jquery.min.js"></script>
         <script src="../Dist/js/index.js"></script>
     </head>
     <body>
@@ -38,7 +40,7 @@
                             <div class="form-group">
                                 <label for="lblgender">Gender:</label><br />
                                 <div class="form-check form-check-inline">
-         <input class="form-check-input" type="radio" name="gender" id="gender" value="1" <?php echo '#gender'=='1' ?'checked':'' ?>/>
+                                 <input class="form-check-input" type="radio" name="gender"  id="gender" value="1" />
                                     <label class="form-check-label" for="inlineRadio1">Male</label>
                                 </div>
                                 <div class="form-check form-check-inline">
@@ -51,6 +53,7 @@
                                 </div>
                                 <h6 id="gendercheck"></h6>
                             </div>
+
                             <input type="hidden" name="id" id="id">
                             <button type="submit" class="btn btn-primary" name="save" id="save">Submit</button>
                             <button type="submit" class="btn btn-warning" name="update" id="update">update</button>

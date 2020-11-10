@@ -239,25 +239,41 @@ $(document).ready(function () {
       $(document).on("click", ".editbtn", function () {
           // e.preventDefault();
           let cust_id = $(this).attr("id");
+          var gender = document.getElementsByName("gender");
+          console.log(gender);
+
           //  var cust_id=$(this).id;
-          console.log(cust_id);
+         // console.log(cust_id);
           $.ajax({
               url: "action.php",
               method: "GET",
               data: { cust_id: cust_id },
               success: function (response) {
                   data = JSON.parse(response);
-  
+                //console.log("working");
                   console.log(data);
-                  console.log(data[0].id);
+                 // console.log(data[0].id);
                   $("#id").val(data[0].id);
                   $("#user_name").val(data[0].user_name);
                   $("#user_email").val(data[0].user_email);
                   $("#phone_no").val(data[0].phone_no);
-                  $("#gender").val(data[0].gender);
-                  // var gender = $(".gender:checked").val(data[0].gender);
-                  $gender = data[0].gender;
-                  console.log($gender);
+                  $("#gd").val(data[0].gender);
+                   var ts=(data[0].gender);
+                  if(ts==1)
+                  {
+                     $(':radio[name=gender][value="1"]').prop('checked', true);
+                  }
+                  else if(ts==2)
+                  {
+                    $(':radio[name=gender][value="2"]').prop('checked', true);
+
+                  }
+                  else
+                  {
+                    $(':radio[name=gender][value="3"]').prop('checked', true);
+
+                  }
+
               },
           });
       });
